@@ -9,26 +9,23 @@ const connectDB = require('./config/db');
 const songRoutes = require('./routes/songRoutes');
 const playlistRoutes = require('./routes/playlistRoutes');
 const userRoutes = require('./routes/userRoutes');
-// const uploadRoutes = require('./routes/uploadRoutes');
 
 dotenv.config();
 connectDB();
 
 const app = express();
 
-// To know which route is calling. Using morgan for that
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
 // Middleware
-app.use(express.json()); // For accepting json data, POST
+app.use(express.json());
 
 // Route Middlewares
 app.use('/api/songs', songRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/users', userRoutes);
-// app.use('/api/upload', uploadRoutes);
 
 // Preparation for production deployment
 if (process.env.NODE_ENV === 'production') {
@@ -42,8 +39,8 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running....');
     });
 }
-// Error Middlewares
 
+// Error Middlewares
 app.use(notFound);
 app.use(errorHandler);
 
