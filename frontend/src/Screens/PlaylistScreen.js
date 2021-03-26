@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -22,8 +22,6 @@ const PlaylistScreen = ({ history }) => {
     const playlistDelete = useSelector((state) => state.playlistDelete);
     const { error: errorDelete, success: successDelete } = playlistDelete;
 
-    // const [arrplaylists, setArrPlaylists] = useState([]);
-
     useEffect(() => {
         if (!userInfo) {
             history.push('/login?redirect=playlists');
@@ -32,7 +30,6 @@ const PlaylistScreen = ({ history }) => {
             if (songs.length === 0 && !errorSongs) {
                 dispatch(listSongs());
             }
-            console.log('Dispatch: Get All playlists', allPlaylists);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, history, userInfo, successDelete]);

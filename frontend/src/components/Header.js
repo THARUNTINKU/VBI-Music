@@ -19,8 +19,8 @@ const Header = () => {
         <header>
             <Navbar bg='light' variant='primary' expand='lg' collapseOnSelect>
                 <Container>
-                    <Navbar.Brand href='/' style={{ color: 'grey' }}>
-                        <i className='fas fa-music'></i> VBI Musiq
+                    <Navbar.Brand href='/' style={{ color: 'primary' }}>
+                        <i className='fas fa-music'></i> VBI Music
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>

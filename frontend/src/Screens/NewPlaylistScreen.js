@@ -32,7 +32,6 @@ const NewPlaylistScreen = ({ history }) => {
     const [filteredSong, setFilteredSong] = useState([]);
 
     const handleFilter = useCallback(() => {
-        console.log('new playlist screen: handleFIlter');
         const filterS = songs.filter((song) =>
             song.title.toLowerCase().includes(searchQuery)
         );

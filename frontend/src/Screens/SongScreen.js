@@ -35,7 +35,6 @@ const SongScreen = () => {
     }, [dispatch, searchQuery, loading]);
 
     const handleSearch = (query) => {
-        console.log('handleSearch: ', query);
         setSearchQuery(query);
     };
 

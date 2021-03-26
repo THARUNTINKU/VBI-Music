@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     ButtonGroup,
@@ -13,14 +14,11 @@ import SearchBox from '../components/SearchBox';
 import Song from '../components/Song';
 import { getPlaylist, updatePlaylists } from '../actions/playlistActions';
 import { listSongs } from '../actions/songActions';
-import { PLAYLIST_DETAILS_RESET } from '../constants/playlistConstants';
 
 const ViewPlaylistScreen = ({ history, match }) => {
-    // const playlistId = match.params.id;
     const playlistId = match.params.id;
 
     const dispatch = useDispatch();
-    // dispatch(getPlaylist(playlistId));
 
     const playlistDetails = useSelector((state) => state.playlistDetails);
     const {
@@ -44,7 +42,6 @@ const ViewPlaylistScreen = ({ history, match }) => {
     const [addToPlaylist, setAddToPlaylist] = useState([]);
 
     useEffect(() => {
-        console.log('Re-rendering');
         if (playlistId !== id) {
             dispatch(getPlaylist(playlistId));
         }
@@ -53,13 +50,8 @@ const ViewPlaylistScreen = ({ history, match }) => {
         }
         if (playlistSongs || searchQuery !== '') {
             if (listAllSongFlag) {
-                // console.log('Passing all songs: ', allSongs);
-                // setFilteredSong(allSongs);
-                // removeExistingPlaylistSongs(allSongs);
-
-                handleFilter(setFlags(allSongs));
+                handleFilter(removeExistingPlaylistSongs(allSongs));
             } else {
-                // console.log('Passing playlist Songs: ', playlistSongs);
                 handleFilter(playlistSongs);
                 setAddToPlaylist(playlistSongs);
             }
@@ -77,12 +69,10 @@ const ViewPlaylistScreen = ({ history, match }) => {
     ]);
 
     const handleFilter = (songarr) => {
-        // console.log('songarr: ', songarr);
         const filterS = songarr.filter((song) =>
             song.title.toLowerCase().includes(searchQuery)
         );
         setFilteredSong(filterS);
-        // setName(playlistName);
 
         if (filterS.length === 0) setSearchResults(`No records`);
         else if (filterS.length === 1) setSearchResults(`Found 1 record`);
@@ -90,45 +80,29 @@ const ViewPlaylistScreen = ({ history, match }) => {
             setSearchResults(`Showing ${filterS.length} records`);
     };
 
-    const setFlags = (arrSongs) => {
+    const removeExistingPlaylistSongs = (arrSongs) => {
         let output = [...arrSongs];
         filteredSong.map((e, i) => {
             output = output.filter((song) => song._id !== filteredSong[i]._id);
         });
         return output;
     };
-    const removeExistingPlaylistSongs = (arrSongs) => {
-        let arraySongs = arrSongs;
-        filteredSong.map((e, i) => {
-            arraySongs = arraySongs.filter(
-                (song) => song._id !== filteredSong[i]._id
-            );
-        });
-
-        console.log('arraySongs: ', arraySongs);
-
-        setFilteredSong(arraySongs);
-    };
 
     const savePlaylistAction = () => {
         let updatedPlaylist = {};
         if (listAllSongFlag) {
-            console.log('ADD SAVE');
             updatedPlaylist = {
                 playlistName: name,
                 playlistSongs: [...addToPlaylist],
             };
         } else {
-            console.log('DELETE SAVE');
             updatedPlaylist = {
                 playlistName: name,
                 playlistSongs: [...filteredSong],
             };
         }
-        console.log('updatedPlaylist: ', updatedPlaylist);
 
         dispatch(updatePlaylists(playlistId, updatedPlaylist));
-        // dispatch({ type: PLAYLIST_DETAILS_RESET });
         history.push('/playlists');
     };
 
@@ -161,7 +135,6 @@ const ViewPlaylistScreen = ({ history, match }) => {
         const newFilter = filteredSong.filter(
             (song) => song._id !== addSongToPlaylist._id
         );
-        console.log('New filtered list: ', newFilter);
         setFilteredSong([...newFilter]);
     };
 

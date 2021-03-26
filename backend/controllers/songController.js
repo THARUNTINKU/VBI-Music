@@ -11,7 +11,7 @@ const getSongs = asyncHandler(async (req, res) => {
 
 // @desc    Get song by id
 // @route   GET /api/songs/:id
-// @access  Private/Admin
+// @access  Private
 const getSongById = asyncHandler(async (req, res) => {
     const song = await Song.findById(req.params.id).select('-__v');
 

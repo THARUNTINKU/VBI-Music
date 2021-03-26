@@ -4,7 +4,7 @@ const { Song } = require('../models/song.model');
 
 // @desc    Get all playlists
 // @route   GET /api/playlists
-// @access  Public
+// @access  Private
 const getPlaylist = asyncHandler(async (req, res) => {
     const playlists = await Playlist.find().select('-__v');
     res.json(playlists);
@@ -12,7 +12,7 @@ const getPlaylist = asyncHandler(async (req, res) => {
 
 // @desc    Fetch single playlists
 // @route   GET /api/playlists/:id
-// @access  Public
+// @access  Private
 const getPlaylistById = asyncHandler(async (req, res) => {
     const playlist = await Playlist.findById(req.params.id);
 
@@ -26,7 +26,7 @@ const getPlaylistById = asyncHandler(async (req, res) => {
 
 // @desc    Create a playlist
 // @route   POST /api/products
-// @access  Private/Admin
+// @access  Private
 const createPlaylist = asyncHandler(async (req, res) => {
     // validate
     const { error } = validatePlaylist(req.body);
@@ -51,9 +51,8 @@ const createPlaylist = asyncHandler(async (req, res) => {
 
 // @desc    Update a playlist
 // @route   PUT /api/products/:id
-// @access  Private/Admin
+// @access  Private
 const updatePlaylist = asyncHandler(async (req, res) => {
-    console.log('save playlist', req.body);
     const { playlistName, playlistSongs: arrPlaylistSongs } = req.body;
 
     const playlist = await Playlist.findById({ _id: req.params.id });
@@ -67,7 +66,7 @@ const updatePlaylist = asyncHandler(async (req, res) => {
 
 // @desc    Update a playlist with existing
 // @route   PUT /api/products/:id
-// @access  Private/Admin
+// @access  Private
 const updatePlaylistWithExisting = asyncHandler(async (req, res) => {
     const { playlistName, playlistSongs: arrPlaylistSongs } = req.body;
 

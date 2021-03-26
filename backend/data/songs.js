@@ -98,13 +98,6 @@ const songs = [
         image: '/images/music.png',
     },
     {
-        title: 'Faded',
-        album: 'Different World',
-        singer: 'Alan Walker',
-        duration: '3:32',
-        image: '/images/music.png',
-    },
-    {
         title: 'Adele - Hello',
         album: 'Hello',
         singer: 'Adele',
