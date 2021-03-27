@@ -29,6 +29,7 @@ app.use('/api/users', userRoutes);
 
 // Preparation for production deployment
 if (process.env.NODE_ENV === 'production') {
+    console.log(__dirname);
     app.use(express.static(path.join(__dirname, '/frontend/build')));
 
     app.get('*', (req, res) =>
