@@ -1,11 +1,8 @@
 {
-  "name": "vbi-music-app",
+  "name": "vbi-music",
   "version": "1.0.0",
   "description": "A simple music platform",
   "main": "server.js",
-  "engines": {
-    "node": "12.x"
-  },
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
