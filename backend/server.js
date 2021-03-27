@@ -27,6 +27,8 @@ app.use('/api/songs', songRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/users', userRoutes);
 
+__dirname = path.resolve();
+
 // Preparation for production deployment
 if (process.env.NODE_ENV === 'production') {
     console.log(__dirname);
