@@ -103,6 +103,7 @@ const ViewPlaylistScreen = ({ history, match }) => {
         }
 
         dispatch(updatePlaylists(playlistId, updatedPlaylist));
+        dispatch(getPlaylist(playlistId));
         history.push('/playlists');
     };
 
